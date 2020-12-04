@@ -1,21 +1,19 @@
 import styled from "styled-components";
 
 export const AppHeaderWrapper = styled.div`
-  height: 75px;
+  height: 70px;
   background-color: #242424;
+  border-bottom: 1px solid #000;
   font-size: 14px;
-
-  .content {
+  .top {
     display: flex;
     justify-content: space-between;
   }
-
-
   .divider {
     height: 5px;
-    background-color: #C20C0C;
+    background-color: #c20c0c;
   }
-`
+`;
 
 export const HeaderLeft = styled.div`
   display: flex;
@@ -31,16 +29,13 @@ export const HeaderLeft = styled.div`
   .select-list {
     display: flex;
     line-height: 70px;
-
     .select-item {
       position: relative;
-
       a {
         display: block;
-        padding: 0 20px;
+        padding: 0 19px;
         color: #ccc;
       }
-
       :last-of-type a {
         position: relative;
         ::after {
@@ -48,19 +43,18 @@ export const HeaderLeft = styled.div`
           content: "";
           width: 28px;
           height: 19px;
-          background-image: url(${require("@/assets/img/sprite_01.png")});
+          background-image: url(${require("@/assets/img/sprite_01.png").default});
           background-position: -190px 0;
           top: 20px;
           right: -15px;
         }
       }
-
-      &:hover a, .active {
+      &:hover a,
+      .active {
         color: #fff;
         background: #000;
         text-decoration: none;
       }
-
       .active .icon {
         position: absolute;
         display: inline-block;
@@ -73,7 +67,7 @@ export const HeaderLeft = styled.div`
       }
     }
   }
-`
+`;
 
 export const HeaderRight = styled.div`
   display: flex;
@@ -98,9 +92,21 @@ export const HeaderRight = styled.div`
     height: 32px;
     line-height: 32px;
     text-align: center;
-    border: 1px solid #666;
     border-radius: 16px;
     margin: 0 16px;
+    border: 1px solid #4F4F4F;
+    cursor:pointer;
+    &:hover{
+      color: #fff;
+      border: 1px solid #ccc;
+    }
+  
   }
-`
-
+  .login {
+    color: #787878;
+    cursor:pointer;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+`;
