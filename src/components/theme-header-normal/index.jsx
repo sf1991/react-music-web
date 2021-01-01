@@ -11,6 +11,7 @@ export default memo(function HYThemeHeaderNormal(props) {
     <HeaderWrapper>
       <div className="title">{title}</div>
       <div className="right">
+        
         {rightSlot}
       </div>
     </HeaderWrapper>
