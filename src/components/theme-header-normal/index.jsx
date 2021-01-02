@@ -7,6 +7,7 @@ import {
 export default memo(function HYThemeHeaderNormal(props) {
   const { title, rightSlot } = props;
 
+  
   return (
     <HeaderWrapper>
       <div className="title">{title}</div>
