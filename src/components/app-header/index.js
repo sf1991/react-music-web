@@ -21,7 +21,7 @@ export default memo(function HYAppHeader() {
             {
               headerLinks.map((item, index) => {
                 return (
-                  <div className={classnames("select-item")} key={item.title}>
+                  <div className={ classnames("select-item") } key={item.title}>
                     {
                       index < 3 ?
                       
