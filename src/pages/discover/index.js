@@ -1,19 +1,16 @@
-import React, {memo} from 'react';
+import React, { memo } from "react";
 import { NavLink } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
-
-import { 
+import {
   dicoverMenu
 } from "@/services/local-data";
-
 import {
   DiscoverWrapper,
   TopMenu
-} from "./style";
-
+} from './style'
 export default memo(function Discover(props) {
   const { route } = props;
-
+  console.log(route)
   return (
     <DiscoverWrapper>
       <div className="top">
@@ -32,4 +29,4 @@ export default memo(function Discover(props) {
       {renderRoutes(route.routes)}
     </DiscoverWrapper>
   )
-})
+});

@@ -1,5 +1,5 @@
 const path = require('path');
-
+console.log(path)
 const resolve = dir => path.resolve(__dirname, dir);
 
 module.exports = {

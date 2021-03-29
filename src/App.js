@@ -1,16 +1,20 @@
-import React from 'react';
-import routes from './router'
-// import { Provider } from "react-redux";
-// import store from "./store";
+import React, { memo } from "react";
+import { renderRoutes } from "react-router-config";
+import { Provider } from "react-redux";
+import routes from "./router";
+import store from "./store";
+import { HashRouter } from "react-router-dom";
+import AppHeader from "@/components/app-header";
+import AppFooter from "@/components/app-footer";
 
-import HYMain from './pages/main';
-console.log(HYMain)
-function App() {
+export default memo(function App() {
   return (
-    // <Provider store={store}>
-      <HYMain/>
-    // </Provider>
+    <Provider store={store}>
+      <HashRouter>
+        <AppHeader />
+        {renderRoutes(routes)}
+        <AppFooter />
+      </HashRouter>
+    </Provider>
   );
-}
-
-export default App;
+});
