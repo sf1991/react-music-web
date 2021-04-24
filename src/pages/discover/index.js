@@ -10,7 +10,7 @@ import {
 } from './style'
 export default memo(function Discover(props) {
   const { route } = props;
-  console.log(route)
+
   return (
     <DiscoverWrapper>
       <div className="top">
