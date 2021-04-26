@@ -33,26 +33,31 @@ export const FooterLeft = styled.div`
       margin-right: 15px;
     }
   }
+  .report{
+    span{
+      margin-right: 14px
+    }
+  }
 `
 
 export const FooterRight = styled.ul`
   display: flex;
-
+  .item+.item{
+    margin-left: 30px;
+  }
   .item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 40px;
 
     .link {
       display: block;
       width: 50px;
       height: 45px;
-
-      background-image: url(${require("@/assets/img/sprite_footer_02.png").default});
+      margin:0 5px;
+      background-image: url(${require("@/assets/img/sprite_footer_02.png")});
       background-size: 110px 450px;
     }
-
     :nth-child(1) .link {
       background-position: -60px -101px;
     }
@@ -71,7 +76,7 @@ export const FooterRight = styled.ul`
       display: block;
       width: 52px;
       height: 10px;
-      background-image: url(${require("@/assets/img/sprite_footer_01.png").default});
+      background-image: url(${require("@/assets/img/sprite_footer_01.png")});
       background-size: 180px 100px;
     }
 

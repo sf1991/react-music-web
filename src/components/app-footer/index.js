@@ -48,13 +48,12 @@ export default memo(function HYAppFooter() {
             </span>
           </div>
           <div className="info">
-            <span>粤B2-20090191-18</span>
             <a
               href="http://www.beian.miit.gov.cn/publish/query/indexFirst.action"
               rel="noopener noreferrer"
               target="_blank"
             >
-              工业和信息化部备案管理系统网站
+              粤B2-20090191-18 工业和信息化部备案管理系统网站
             </a>
           </div>
         </FooterLeft>

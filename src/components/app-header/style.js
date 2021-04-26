@@ -34,7 +34,7 @@ export const HeaderLeft = styled.div`
       position: relative;
       a {
         display: block;
-        padding: 0 20px;
+        padding: 0 19px;
         color: #ccc;
       }
       :last-of-type a {
@@ -44,7 +44,7 @@ export const HeaderLeft = styled.div`
           content: "";
           width: 28px;
           height: 19px;
-          background-image: url(${require("@/assets/img/sprite_01.png").default});
+          background-image: url(${require("@/assets/img/sprite_01.png")});
           background-position: -190px 0;
           top: 20px;
           right: -15px;
@@ -98,5 +98,8 @@ export const HeaderRight = styled.div`
     border: 1px solid #666;
     border-radius: 16px;
     margin: 0 16px;
+  }
+  .login{
+    color: #787878;
   }
 `;
