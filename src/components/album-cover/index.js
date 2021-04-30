@@ -13,7 +13,7 @@ export default memo(function AlbumCover(props) {
   const { info, size = "100px", width = "118px", bgp = "-570px" } = props;
 
   return (
-    <AlbumWrapper size={size} width={width} bgp={bgp}>
+    <AlbumWrapper size={size} width={width} bgp={bgp} className="sprite_02">
       <div className="album-image">
         <img src={getSizeImage(info.picUrl, 150)} alt="" />
         <a href="/abc" className="cover sprite_covor">{info.name}</a>

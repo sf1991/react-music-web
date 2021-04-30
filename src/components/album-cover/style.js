@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 export const AlbumWrapper = styled.div`
+
+  background-position: -260px 110px;
+
   .album-image {
     position: relative;
     width: ${props => props.width};
     height: ${props => props.size};
     overflow: hidden;
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 7px;
 
     img {
       width: ${props => props.size};
@@ -27,15 +31,16 @@ export const AlbumWrapper = styled.div`
   .album-info {
     font-size: 12px;
     width: ${props => props.size};
+    white-space: nowrap;
     .name {
       color: #000;
-      white-space: nowrap;
       text-overflow: ellipsis;
-      overflow: hidden;
+      overflow: hidden; 
     }
-
     .artist {
       color: #666;
+      text-overflow: ellipsis;
+      overflow: hidden; 
     }
   }
 `

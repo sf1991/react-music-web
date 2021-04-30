@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AlbumWrapper = styled.div`
-  margin-top: 50px;
+  margin-top: 35px;
 
   .content {
     height: 186px;
@@ -15,7 +15,8 @@ export const AlbumWrapper = styled.div`
       width: 30px;
       height: 17px;
       cursor: pointer;
-    }
+      position:relative;
+      top:-10px    }
 
     .arrow-left {
       background-position: -260px -75px;

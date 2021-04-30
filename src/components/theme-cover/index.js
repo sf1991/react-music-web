@@ -11,6 +11,7 @@ import {
 
 export default memo(function ThemeCover(props) {
   const { info, right } = props;
+
   return (
     <ThemeCoverWrapper right={right}>
       <div className="cover-top">
@@ -29,7 +30,7 @@ export default memo(function ThemeCover(props) {
         {info.name}
       </div>
       <div className="cover-source">
-        by {info.copywriter || info.creator.nickname}
+        {info.copywriter || info.creator.nickname}
       </div>
     </ThemeCoverWrapper>
   )

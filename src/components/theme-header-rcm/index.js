@@ -7,7 +7,7 @@ import {
 } from "./style";
 
 const ThemeHeaderRCM = memo(function (props) {
-  const { title, keywords, moreLink, keywordClick } = props;
+  const { title, keywords, moreLink="/", keywordClick } = props;
 
   return (
     <HeaderWrapper className="sprite_02">
