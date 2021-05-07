@@ -39,7 +39,7 @@ export const Control = styled.div`
     width: 36px;
     height: 36px;
     margin: 0 8px;
-    background-position: 0 ${props => props.isPlaying ? "-165px": "-204px"};
+    background-position: 0 ${props => props.isPlaying ? "-165px" : "-204px"};
   }
 
   .next {
@@ -51,11 +51,16 @@ export const PlayInfo = styled.div`
   display: flex;
   width: 642px;
   align-items: center;
-
+  
   .image {
     width: 34px;
     height: 34px;
+    overflow:hidden;
     border-radius: 5px;
+    img{
+      width: 34px;
+      height: 34px;
+    }
   }
 
   .info {
@@ -146,15 +151,15 @@ export const Operator = styled.div`
 
     .loop {
       background-position: ${props => {
-        switch(props.sequence) {
-          case 1:
-            return "-66px -248px";
-          case 2:
-            return "-66px -344px";
-          default:
-            return "-3px -344px";
-        }
-      }};
+    switch (props.sequence) {
+      case 1:
+        return "-66px -248px";
+      case 2:
+        return "-66px -344px";
+      default:
+        return "-3px -344px";
+    }
+  }};
     }
 
     .playlist {

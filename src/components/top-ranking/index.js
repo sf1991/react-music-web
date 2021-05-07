@@ -1,21 +1,21 @@
 import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { getSizeImage } from '@/utils/format-utils';
-// import { getSongDetailAction } from '@/pages/player/store';
+import { getSongDetailAction } from '@/pages/player/store';
 import { TopRankingWrapper } from './style';
 export default memo(function TopRanking(props) {
   const { info } = props;
   const { tracks = [] } = info;
   const dispatch = useDispatch();
   const playMusic = (item) => {
-    // dispatch(getSongDetailAction(item.id));
+    dispatch(getSongDetailAction(item.id));
   }
 
   return (
     <TopRankingWrapper>
       <div className="header">
         <div className="image">
-          <img src={getSizeImage(info.coverImgUrl)} alt="" />
+          <img src={getSizeImage(info.coverImgUrl, 80)} alt="" />
           <a href="/" className="image_cover">ranking</a>
         </div>
         <div className="info">
@@ -28,15 +28,15 @@ export default memo(function TopRanking(props) {
       </div>
       <div className="list">
         {
-          tracks.slice(0,10).map((item,index)=>{
+          tracks.slice(0, 10).map((item, index) => {
             return (
               <div key={item.id} className='list-item'>
                 <div className="rank">{index + 1}</div>
                 <div className="info">
                   <span className="name text-nowrap">{item.name}</span>
                   <div className="operate">
-                    <button className="btn sprite_02 play" 
-                            onClick={e => playMusic(item)}></button>
+                    <button className="btn sprite_02 play"
+                      onClick={e => playMusic(item)}></button>
                     <button className="btn sprite_icon2 addto"></button>
                     <button className="btn sprite_02 favor"></button>
                   </div>
