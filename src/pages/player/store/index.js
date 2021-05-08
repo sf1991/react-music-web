@@ -1,5 +1,5 @@
 import reducer from './reducer'
-import { getSongDetailAction } from './actionCreator'
+import { getSongDetailAction } from './actionCreators'
 export {
   reducer,
   getSongDetailAction

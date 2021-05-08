@@ -3,6 +3,7 @@ import { Redirect, Route } from "react-router-dom";
 import Recommend from "../pages/discover/recommend";
 import Ranking from "../pages/discover/ranking";
 import Discover from "@/pages/discover";
+import Song from "@/pages/song";
 import Mine from "@/pages/mine";
 import Friend from "@/pages/friend";
 const routes = [
@@ -28,6 +29,16 @@ const routes = [
         path: '/discover/rank',
         component: Ranking,
       }
+    ]
+  },
+  {
+    path: "/song",
+    component: Discover,
+    routes:[
+      {
+        path: '/',
+        component:Song
+      },
     ]
   },
   {

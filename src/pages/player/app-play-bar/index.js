@@ -1,11 +1,16 @@
-import React, { memo, useEffect, useState, useRef, useCallback } from 'react'
+import React, { memo,useMemo, useEffect, useState, useRef, useCallback } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+
 import { getSizeImage, formatMinuteSecond, getPlayUrl } from '@/utils/format-utils.js'
-// import {
-//   getSongDetailAction,
-// } from '@/store/actionCreators'
 
-
+import { 
+  changeCurrentSongAction,
+  changeCurrentSongIndexAction,
+  changeSequenceAction,
+  // changeCurrentIndexAndSongAction,
+  // changeCurrentLyricIndexAction 
+} from '../store/actionCreators';
+import PlaylistPanel from './components/playlist-panel'
 import {
   PlaybarWrapper,
   Control,
@@ -13,11 +18,14 @@ import {
   Operator
 } from './style';
 import { NavLink } from 'react-router-dom'
-import { Slider, message } from 'antd'
+import { Slider, Tooltip,message } from 'antd'
 export default memo(function AppPlayBar() {
 
   const [isPlaying, setIsPlaying] = useState(false)
   const [isChanging, setIsChanging] = useState(false);
+  const [showVolumeBar, setShowVolumeBar] = useState(false)
+  const [showPanel, setShowPanel] = useState(true)
+  
   const [currentTime, setCurrentTime] = useState(0)
   const [progress, setProgress] = useState(0);
   useEffect(() => {
@@ -25,10 +33,18 @@ export default memo(function AppPlayBar() {
   }, [isPlaying])
 
   const dispatch = useDispatch()
-
-  const { currentSong } = useSelector((state) => ({
+  const { currentSong , sequence, playList } = useSelector((state) => ({
     currentSong: state.getIn(["player", "currentSong"]),
+    sequence: state.getIn(["player", "sequence"]),
+    playList: state.getIn(["player", "playList"]),
   }), shallowEqual)
+
+  // useEffect(() => {
+  //   if(playList.length){
+  //     dispatch(changeCurrentSongAction(playList[0]));
+  //     // dispatch(changeCurrentSongIndexAction(0));
+  //   }
+  // }, [dispatch,playList]);
 
   useEffect(() => {
     audioRef.current.src = getPlayUrl(currentSong.id);
@@ -46,10 +62,11 @@ export default memo(function AppPlayBar() {
       setProgress(currentTime / duration * 100);
     }
   }
-
-
+  
+  const handleTimeEnd = (e) => {
+    
+  }
   const audioRef = useRef()
-
   // other handle
   const picUrl = (currentSong.al && currentSong.al.picUrl)// 图片url
   const songName = currentSong.name // 歌曲名字
@@ -61,16 +78,29 @@ export default memo(function AppPlayBar() {
     isPlaying ? audioRef.current.pause() : audioRef.current.play()
   }, [isPlaying])
 
+  const sequenceTitle= useMemo(() => {
+    const title=['循环','随机','单曲循环']
+    return title[sequence]
+  }, [sequence])
 
-  const sliderChange = useCallback((value) => {
+
+  const changeSequence = () => {
+    let currentSequence = sequence + 1;
+    if (currentSequence > 2) {
+      currentSequence = 0;
+    }
+    dispatch(changeSequenceAction(currentSequence));
+  }
+
+
+  const sliderChange = useCallback(value => {
     setIsChanging(true);
     setProgress(value);
     const time = value / 100.0 * duration;
     setCurrentTime(time);
-
   }, [duration])
 
-  const sliderAfterChange = useCallback((value) => {
+  const sliderAfterChange = useCallback(value => {
     const time = value / 100.0 * duration;
     audioRef.current.currentTime = time / 1000;
     // setCurrentTime(time)
@@ -78,25 +108,23 @@ export default memo(function AppPlayBar() {
     setIsPlaying(true)
     audioRef.current.play()
   }, [duration]);
+
+
+  const changVolume = useCallback(value=>{
+    audioRef.current.volume = value / 100
+  }, [])
   return (
     <PlaybarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
-          <button className="sprite_playbar prev"></button>
-          <button className="sprite_playbar btn play" title="播放/暂停(P)" onClick={playMusic}></button>
-          <button className="sprite_playbar btn next" ></button>
+          <button className="sprite_playbar prev" title="上一首"></button>
+          <button className="sprite_playbar btn play" title="播放/暂停" onClick={playMusic}></button>
+          <button className="sprite_playbar btn next"  title="下一首"></button>
         </Control>
         <PlayInfo>
           <div className="image">
-            <NavLink
-              to={{
-                pathname: '/discover/song',
-              }}
-
-            >
-            </NavLink>
             <img src={picUrl ? getSizeImage(picUrl, 35) : require("@/assets/img/default_album.jpg")} alt="" />
-
+            <NavLink to={{ pathname: '/song' }} className="sprite_playbar mask"/>
           </div>
 
           <div className="info">
@@ -114,25 +142,25 @@ export default memo(function AppPlayBar() {
             </div>
           </div>
         </PlayInfo>
-        <Operator>
+        <Operator  sequence={sequence}>
           <div className="left">
             <button className="sprite_playbar btn favor"></button>
             <button className="sprite_playbar btn share"></button>
           </div>
           <div className="right sprite_playbar">
-            <button className="sprite_playbar btn volume"></button>
-            <button className="sprite_playbar btn loop"></button>
-            <button className="sprite_playbar btn playlist"></button>
+            <div className="sprite_playbar volume-bar" style={{ display: showVolumeBar ? 'block' : 'none' }}>
+              <Slider vertical defaultValue={100} onChange={changVolume} />
+            </div>
+            <button className="sprite_playbar btn volume" onClick={e => setShowVolumeBar(!showVolumeBar)}></button>
+            <Tooltip title={sequenceTitle}>
+              <button className="sprite_playbar btn loop" onClick={e => changeSequence()}></button>
+            </Tooltip>
+            <button className="sprite_playbar btn playlist" onClick={e => setShowPanel(!showPanel)}>{playList.length}</button>
           </div>
         </Operator>
       </div>
-      <audio
-        id="audio"
-        ref={audioRef}
-        onTimeUpdate={timeUpdate}
-        // onEnded={handleTimeEnd}
-        preload="auto"
-      />
+      <audio id="audio" ref={audioRef} onTimeUpdate={timeUpdate} onEnded={handleTimeEnd} preload="auto" />
+      {showPanel && <PlaylistPanel />}
     </PlaybarWrapper >
   )
 })

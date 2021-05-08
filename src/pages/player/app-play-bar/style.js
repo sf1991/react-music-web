@@ -29,21 +29,34 @@ export const Control = styled.div`
   .prev, .next {
     width: 28px;
     height: 28px;
+    cursor: pointer;
   }
 
   .prev {
     background-position: 0 -130px;
+    &:hover {
+      background-position: -30px -130px;
+    }
   }
 
   .play {
     width: 36px;
     height: 36px;
     margin: 0 8px;
+    cursor: pointer;
     background-position: 0 ${props => props.isPlaying ? "-165px" : "-204px"};
+    &:hover {
+      /* 动态的传递 */
+      background-position: -40px
+        ${props => (props.isPlaying ? '-165px' : '-204px')};
+    }
   }
 
   .next {
     background-position: -80px -130px;
+    &:hover {
+      background-position: -110px -130px;
+    }
   }
 `
 
@@ -57,6 +70,16 @@ export const PlayInfo = styled.div`
     height: 34px;
     overflow:hidden;
     border-radius: 5px;
+    position: relative;
+    .mask{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      display: block;
+      width: 34px;
+      height: 34px;
+      background-position: 0 -80px;
+    }
     img{
       width: 34px;
       height: 34px;
@@ -86,8 +109,8 @@ export const PlayInfo = styled.div`
 
       .ant-slider {
         width: 493px;
-        margin-right: 10px;
-
+        margin-right:15px;
+        margin-top:7px;
         .ant-slider-rail {
           height: 9px;
           background: url(${require("@/assets/img/progress_bar.png")}) right 0;
@@ -109,10 +132,13 @@ export const PlayInfo = styled.div`
 
       .time {
         .now-time {
-          color: #e1e1e1;
+          color: #a1a1a1;
         }
         .divider {
           margin: 0 3px;
+        }
+        .total-time{
+          color: #797979;
         }
       }
     }
@@ -123,51 +149,114 @@ export const PlayInfo = styled.div`
 export const Operator = styled.div`
   display: flex;
   position: relative;
-  top: 5px;
+  top: 2px;
 
   .btn {
     width: 25px;
     height: 25px;
+    cursor: pointer;
   }
 
   .favor {
     background-position: -88px -163px;
+    &:hover {
+      background-position: -88px -189px;
+    }
   }
 
   .share {
     background-position: -114px -163px;
+    &:hover {
+      background-position: -114px -189px;
+    }
   }
-
+  .left{
+    width:60px;
+    display: flex;
+    align-items: center;
+    .btn{
+      margin-right:2px
+    }
+  }
   .right {
     display: flex;
     align-items: center;
+    position: relative;
     width: 126px;
     padding-left: 13px;
-    background-position: -147px -248px;
+    background-position: -147px -249px;
     
     .volume {
       background-position: -2px -248px;
+      &:hover {
+        background-position: -31px -248px;
+      }
     }
+    .volume-bar {
+    position: absolute;
+    top: -125px;
+    left: 13px;
+    width: 32px;
+    height: 113px;
+    overflow: hidden;
+    padding: 10px;
+    background-position: 0 -503px;
 
+    /* ant design Slider style change */
+    .ant-slider-vertical {
+      margin: 0;
+      .ant-slider-rail {
+        background-color: transparent;
+      }
+      .ant-slider-track {
+        background: url(${require('@/assets/img/playbar_sprite.png')}) no-repeat 0 9999px;
+        background-position: -40px bottom;
+      }
+      .ant-slider-handle {
+        border: 0;
+        background: url(${require('@/assets/img/sprite_icon.png')});
+        background-position: -42px -250px;
+      }
+    }
+  }
     .loop {
       background-position: ${props => {
-    switch (props.sequence) {
-      case 1:
-        return "-66px -248px";
-      case 2:
-        return "-66px -344px";
-      default:
-        return "-3px -344px";
-    }
-  }};
+        switch (props.sequence) {
+          case 1:
+            return "-66px -248px";
+          case 2:
+            return "-66px -344px";
+          default:
+            return "-3px -344px";
+        }
+      }};
+      &:hover {
+        background-position: ${props => {
+          switch (props.sequence) {
+            case 1:
+              return "-93px -248px";
+            case 2:
+              return "-93px -344px";
+            default:
+              return "-33px -344px";
+          }
+        }};
+      }
     }
 
     .playlist {
-      padding-left: 18px;
+      padding:0;
+      padding-left:21px;
+      line-height: 27px;
       text-align: center;
-      color: #ccc;
+      color: #666;
+      font-size:12px;
       width: 59px;
       background-position: -42px -68px;
+      &:hover {
+        background-position: -42px -98px;
+      }
     }
   }
+ 
 `

@@ -20,7 +20,6 @@ export default memo(function RankingList() {
     topNewList: state.getIn(["recommend", "topNewList"]),
     topOriginList: state.getIn(["recommend", "topOriginList"])
   }), shallowEqual);
-
   useEffect(() => {
     dispatch(getTopData(0))
     dispatch(getTopData(2))

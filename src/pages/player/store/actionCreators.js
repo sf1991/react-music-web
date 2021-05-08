@@ -4,7 +4,7 @@ import { parseLyric } from '@/utils/parse-lyric';
 
 import * as actionTypes from './constants';
 
-const changeCurrentSongAction = (currentSong) => ({
+export const changeCurrentSongAction = (currentSong) => ({
   type: actionTypes.CHANGE_CURRENT_SONG,
   currentSong
 });
